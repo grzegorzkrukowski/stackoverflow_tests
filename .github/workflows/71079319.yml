@@ -19,6 +19,9 @@ jobs:
           echo "::set-output name=release_number::$RELEASE_NUMBER"
   deploy:
     name: Deploy release
+    runs-on: ubuntu-latest
     needs: create_release
-    if: (needs.create_release.result == 'success')
-    run: echo ${{ needs.create_release.outputs.release_id }}
+    steps:
+      - name: Read output
+        run: |
+          echo ${{ needs.create_release.outputs.release_id }}
