@@ -1,0 +1,24 @@
+name: Test 71079319
+
+on:
+  workflow_dispatch:
+
+jobs:
+  create_release:
+    name: Create release
+    runs-on: ubuntu-latest
+    outputs:
+      release_id: ${{ steps.set_release_number.outputs.release_number }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Set release number
+        id: set_release_number
+        run: |
+          RELEASE_NUMBER="666"
+          echo "::set-output name=release_number::$RELEASE_NUMBER"
+  deploy:
+    name: Deploy release
+    needs: create_release
+    if: (needs.create_release.result == 'success')
+    run: echo ${{ needs.create_release.outputs.release_id }}
