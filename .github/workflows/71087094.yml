@@ -1,0 +1,15 @@
+name: Test 71087094
+
+on:
+  workflow_dispatch:
+
+jobs:
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+    steps:
+      - name: Debug echo
+        run: |
+          filename="MY_FILE.TXT"
+          echo "::error::Filename $filename doesn't match possible files"
+          exit 1
