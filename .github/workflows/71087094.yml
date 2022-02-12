@@ -11,5 +11,4 @@ jobs:
       - name: Debug echo
         run: |
           filename="MY_FILE.TXT"
-          echo "::error::Filename $filename doesn't match possible files"
-          exit 1
+          echo "::error::Filename $filename doesn't match possible files" && exit 1
