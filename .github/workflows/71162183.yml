@@ -1,0 +1,17 @@
+name: Test 71162183
+
+on:
+  push:
+    branches:
+      - test
+    paths:
+      - "data/Sales.csv"
+env:
+  BADGE_MESSAGE: ${{ github.event.commits[0].message }}
+
+jobs:
+  create-badge-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Test
+        run: echo "It works"
