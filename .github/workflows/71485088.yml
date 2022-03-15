@@ -12,7 +12,8 @@ jobs:
       - name: Create flag
         id: create_flag
         run: |
-          echo "::set-output name=FLAG::true"
+          FLAG="true"
+          echo "::set-output name=FLAG::$FLAG"
       - name: Run-me if FLAG is true
         if: ${{ steps.create_flag.outputs.FLAG == "true" }}
         run: |
