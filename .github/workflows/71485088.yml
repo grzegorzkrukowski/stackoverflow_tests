@@ -1,0 +1,31 @@
+name: Test 71485088
+
+on:
+  workflow_dispatch:
+
+name: test
+jobs:
+  test_job:
+    name: Test
+    runs-on: ubuntu-20.04
+      steps:
+        - name: Create flag
+          id: create_flag
+          run: |
+            # run some checks and put results in FLAG
+            # and make that available to other tasks.
+            # "true" for true, and "false" for false (so string instead of boolean).
+            $FLAG="true"
+            echo "::set-output name=FLAG::$FLAG"
+
+        - name: Run-me if FLAG is true
+          if: ${{ steps.create_flag.outputs.FLAG == "true" }}
+          run: |
+            echo "TRUE"
+           # some logic to run if flag==true
+
+         - name: Run-me if FLAG is false
+          if: ${{ steps.create_flag.outputs.FLAG == "false" }}
+          run: |
+            echo "FALSE"
+           # some logic to run if flag==true
