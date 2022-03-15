@@ -14,12 +14,12 @@ jobs:
           FLAG="true"
           echo "::set-output name=FLAG::$FLAG"
       - name: Run-me if FLAG is true
-        if: ${{ steps.create_flag.outputs.FLAG == "true" }}
+        if: ${{ steps.create_flag.outputs.FLAG == 'true' }}
         run: |
           echo "TRUE"
           # some logic to run if flag==true
       - name: Run-me if FLAG is false
-        if: ${{ steps.create_flag.outputs.FLAG == "false" }}
+        if: ${{ steps.create_flag.outputs.FLAG == 'false' }}
         run: |
           echo "FALSE"
           # some logic to run if flag==true
