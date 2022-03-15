@@ -12,11 +12,7 @@ jobs:
       - name: Create flag
         id: create_flag
         run: |
-          # run some checks and put results in FLAG
-          # and make that available to other tasks.
-          # "true" for true, and "false" for false (so string instead of boolean).
-          FLAG="true"
-          echo "::set-output name=FLAG::$FLAG"
+          echo "::set-output name=FLAG::true"
       - name: Run-me if FLAG is true
         if: ${{ steps.create_flag.outputs.FLAG == "true" }}
         run: |
