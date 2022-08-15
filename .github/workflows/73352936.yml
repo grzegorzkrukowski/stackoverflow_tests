@@ -27,10 +27,10 @@ jobs:
           echo "evaluation-2 result is ${{ steps.evaluation_2.outputs.evaluation-2-outcome }}"
           echo "$FAIL_OUTCOME"
       - name: send slack failure
-        if: ${{ steps.evaluation_1.outputs.evaluation-1-outcome == FAIL_OUTCOME || steps.evaluation_2.outputs.evaluation-2-outcome == FAIL_OUTCOME }}
+        if: ${{ steps.evaluation_1.outputs.evaluation-1-outcome == env.FAIL_OUTCOME || steps.evaluation_2.outputs.evaluation-2-outcome == env.FAIL_OUTCOME }}
         run: |
           echo "SLACK FAIL"
       - name: send slack success
-        if: ${{ steps.evaluation_1.outputs.evaluation-1-outcome != FAIL_OUTCOME && steps.evaluation_2.outputs.evaluation-2-outcome != FAIL_OUTCOME }}
+        if: ${{ steps.evaluation_1.outputs.evaluation-1-outcome != env.FAIL_OUTCOME && steps.evaluation_2.outputs.evaluation-2-outcome != env.FAIL_OUTCOME }}
         run: |
           echo "SLACK SUCCESS"
