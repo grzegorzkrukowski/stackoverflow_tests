@@ -1,0 +1,36 @@
+name: Test 73352936
+
+on:
+  workflow_dispatch:
+
+env:
+  FAIL_OUTCOME: "fail"
+
+jobs:
+  test_job:
+    name: Test
+    runs-on: ubuntu-20.04
+    steps:
+      - name: evaluation_1
+        id: evaluation_1
+        run: |
+          echo "Nothing"
+      - name: evaluation_2
+        id: evaluation_2
+        run: |
+          echo $FAIL_OUTCOME
+          echo "::set-output name=evaluation-2-outcome::$FAIL_OUTCOME"
+      - name: debug
+        shell: bash
+        run: |
+          echo "evaluation-1 result is ${{ steps.evaluation_1.outputs.outcome }}
+          echo "evaluation-2 result is ${{ steps.evaluation_2.outputs.outcome }}
+          echo $FAIL_OUTCOME
+      - name: send slack failure
+        if: ${{ steps.evaluation_1.outputs.evaluation-1-outcome }} == $FAIL_OUTCOME || ${{ steps.evaluation_2.outputs.evaluation-2-outcome }} == $FAIL_OUTCOME
+        run: |
+          echo "SLACK FAIL"
+      - name: send slack success
+        if: ${{ steps.evaluation_1.outputs.evaluation-1-outcome }} != $FAIL_OUTCOME || ${{ steps.evaluation_2.outputs.evaluation-2-outcome }} != $FAIL_OUTCOME
+        run: |
+          echo "SLACK SUCCESS"
